@@ -1,0 +1,9 @@
+C:\Users\lupus_000\Documents\Visual Studio 2013\Projects\InitiativeTracker\InitiativeTracker\bin\Debug\InitiativeTracker.exe.config
+C:\Users\lupus_000\Documents\Visual Studio 2013\Projects\InitiativeTracker\InitiativeTracker\bin\Debug\InitiativeTracker.exe
+C:\Users\lupus_000\Documents\Visual Studio 2013\Projects\InitiativeTracker\InitiativeTracker\bin\Debug\InitiativeTracker.pdb
+C:\Users\lupus_000\Documents\Visual Studio 2013\Projects\InitiativeTracker\InitiativeTracker\obj\Debug\InitiativeTracker.csprojResolveAssemblyReference.cache
+C:\Users\lupus_000\Documents\Visual Studio 2013\Projects\InitiativeTracker\InitiativeTracker\obj\Debug\InitiativeTracker.Form1.resources
+C:\Users\lupus_000\Documents\Visual Studio 2013\Projects\InitiativeTracker\InitiativeTracker\obj\Debug\InitiativeTracker.Properties.Resources.resources
+C:\Users\lupus_000\Documents\Visual Studio 2013\Projects\InitiativeTracker\InitiativeTracker\obj\Debug\InitiativeTracker.csproj.GenerateResource.Cache
+C:\Users\lupus_000\Documents\Visual Studio 2013\Projects\InitiativeTracker\InitiativeTracker\obj\Debug\InitiativeTracker.exe
+C:\Users\lupus_000\Documents\Visual Studio 2013\Projects\InitiativeTracker\InitiativeTracker\obj\Debug\InitiativeTracker.pdb
