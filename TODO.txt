@@ -1,0 +1,4 @@
+1. Add saving feature
+
+2. Recreate the list as panels that contain a label for the name, a textbox for health, and up and down arrows to move positions in the list
+

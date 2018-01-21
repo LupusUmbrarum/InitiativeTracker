@@ -12,29 +12,69 @@ namespace InitiativeTracker
 {
     public partial class Form1 : Form
     {
-        List<Actor> actors;
+        public static List<Actor> actors;
         Actor temp;
 
         public Form1()
         {
             InitializeComponent();
             actors = new List<Actor>();
+            //masterPanel.Visible = false;
         }
 
-        private void textBox2_KeyDown(object sender, KeyEventArgs e)
+        private void nameBox_Enter(object sender, EventArgs e)
         {
-            switch(e.KeyCode)
+            nameBox.SelectAll();
+        }
+
+        private void nameBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
             {
                 case Keys.Enter:
-                    if(textBox1.Text.Length > 0 && textBox2.Text.Length > 0)
+                    if (nameBox.Text.Length > 0)
+                    {
+                        if (initiativeBox.Text.Length > 0)
+                        {
+                            try
+                            {
+                                temp = new Actor(nameBox.Text, Convert.ToInt32(initiativeBox.Text));
+                                actors.Add(temp);
+                                nameBox.Text = "";
+                                initiativeBox.Text = "";
+                            }
+                            catch (Exception ex) { }
+                        }
+                        else
+                        {
+                            initiativeBox.Focus();
+                        }
+                    }
+                    sortList();
+                    displayList();
+                    break;
+            }
+        }
+
+        private void initiativeBox_Enter(object sender, EventArgs e)
+        {
+            initiativeBox.SelectAll();
+        }
+
+        private void initiativeBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Enter:
+                    if (nameBox.Text.Length > 0 && initiativeBox.Text.Length > 0)
                     {
                         try
                         {
-                            temp = new Actor(textBox1.Text, Convert.ToInt32(textBox2.Text));
+                            temp = new Actor(nameBox.Text, Convert.ToInt32(initiativeBox.Text));
                             actors.Add(temp);
-                            textBox1.Text = "";
-                            textBox2.Text = "";
-                            textBox1.Focus();
+                            nameBox.Text = "";
+                            initiativeBox.Text = "";
+                            nameBox.Focus();
                         }
                         catch (Exception ex) { }
                     }
@@ -44,52 +84,91 @@ namespace InitiativeTracker
             }
         }
 
-        private void textBox1_KeyDown(object sender, KeyEventArgs e)
+        private void removeBox_KeyDown(object sender, KeyEventArgs e)
         {
-            switch (e.KeyCode)
+            if (e.KeyCode == Keys.Enter)
             {
-                case Keys.Enter:
-                    if (textBox1.Text.Length > 0)
+                if (removeBox.Text.Length > 0)
+                {
+                    try
                     {
-                        if(textBox2.Text.Length > 0)
-                        {
-                            try
-                            {
-                                temp = new Actor(textBox1.Text, Convert.ToInt32(textBox2.Text));
-                                actors.Add(temp);
-                                textBox1.Text = "";
-                                textBox2.Text = "";
-                            }
-                            catch (Exception ex) { }
-                        }
-                        else
-                        {
-                            textBox2.Focus();
-                        }
+                        actors.RemoveAt(Convert.ToInt32(removeBox.Text) - 1);
+                        removeBox.Text = "";
                     }
-                    sortList();
+                    catch (Exception ex) { }
                     displayList();
-                    break;
+                }
             }
         }
 
-        private void textBox2_Enter(object sender, EventArgs e)
+        private void addButton_Click(object sender, EventArgs e)
         {
-            textBox2.SelectAll();
+            if (nameBox.Text.Length > 0)
+            {
+                if (initiativeBox.Text.Length > 0)
+                {
+                    try
+                    {
+                        temp = new Actor(nameBox.Text, Convert.ToInt32(initiativeBox.Text));
+                        actors.Add(temp);
+                        nameBox.Text = "";
+                        initiativeBox.Text = "";
+                        nameBox.Focus();
+                    }
+                    catch (Exception ex) { }
+                }
+                else
+                {
+                    initiativeBox.Focus();
+                }
+            }
+            sortList();
+            displayList();
         }
 
-        private void textBox1_Enter(object sender, EventArgs e)
+        private void removeButton_Click(object sender, EventArgs e)
         {
-            textBox1.SelectAll();
+            if (removeBox.Text.Length > 0)
+            {
+                try
+                {
+                    actors.RemoveAt(Convert.ToInt32(removeBox.Text) - 1);
+                    removeBox.Text = "";
+                }
+                catch (Exception ex) { }
+                displayList();
+            }
+        }
+
+        private void clearButton_Click(object sender, EventArgs e)
+        {
+            label1.Text = "";
+            actors.Clear();
+            removeBox.Text = "";
+        }
+
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Coming soon");
+        }
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Coming soon");
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Dispose();
         }
 
         private void sortList()
         {
-            for(int x = 0; x < actors.Count()-1; x++)
+            for (int x = 0; x < actors.Count() - 1; x++)
             {
-                for(int y = 0; y < actors.Count()-x-1; y++)
+                for (int y = 0; y < actors.Count() - x - 1; y++)
                 {
-                    if(actors[y].initiative < actors[y+1].initiative)
+                    if (actors[y].initiative < actors[y + 1].initiative)
                     {
                         Actor temp = actors[y];
                         actors[y] = actors[y + 1];
@@ -102,69 +181,31 @@ namespace InitiativeTracker
         private void displayList()
         {
             label1.Text = "";
-            for(int x = 0; x < actors.Count(); x++)
+            for (int x = 0; x < actors.Count(); x++)
             {
-                label1.Text += "("+(x+1) + ") " + actors[x].name + " " + actors[x].initiative + "\n";
+                label1.Text += "(" + (x + 1) + ") " + actors[x].name + " " + actors[x].initiative + "\n";
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void addCharacter()
         {
-            if (textBox1.Text.Length > 0 && textBox2.Text.Length > 0)
-            {
-                try
-                {
-                    Actor temp = new Actor(textBox1.Text, Convert.ToInt32(textBox2.Text));
-                    actors.Add(temp);
-                }
-                catch (Exception ex) { }
-            }
-            sortList();
-            displayList();
+            CharacterPanel cp = new CharacterPanel("test" + masterPanel.Controls.Count, new Random().Next(), 45, masterPanel.Controls.Count);
+            
+            masterPanel.Controls.Add(cp);
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void masterPanel_DoubleClick(object sender, EventArgs e)
         {
-            label1.Text = "";
-            actors.Clear();
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            if(textBox3.Text.Length > 0)
-            {
-                try
-                {
-                    actors.RemoveAt(Convert.ToInt32(textBox3.Text)-1);
-                }
-                catch (Exception ex) { }
-                displayList();
-            }
-        }
-
-        private void textBox3_KeyDown(object sender, KeyEventArgs e)
-        {
-            if(e.KeyCode == Keys.Enter)
-            {
-                if (textBox3.Text.Length > 0)
-                {
-                    try
-                    {
-                        actors.RemoveAt(Convert.ToInt32(textBox3.Text) - 1);
-                    }
-                    catch (Exception ex) { }
-                    displayList();
-                }
-            }
+            addCharacter();
         }
     }
 
-    public class Actor
+    public struct Actor
     {
         public string name;
         public int initiative;
 
-        public Actor(String name, int initiative)
+        public Actor(string name, int initiative)
         {
             this.name = name;
             this.initiative = initiative;
