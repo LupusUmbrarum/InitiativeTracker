@@ -8,38 +8,87 @@ using System.Windows.Forms;
 
 namespace InitiativeTracker
 {
-    class CharacterPanel : Panel
+    class CharacterPanel : TableLayoutPanel //FlowLayoutPanel works, but has large spaces between each control
     {
         public string name;
         public int initiative, health;
 
-        private Label label;
+        private Label nameLabel, orderLabel;
         private TextBox healthBox;
         private Button upButton, downButton;
 
         public CharacterPanel(string name, int initiative, int health, int tag)
         {
+            this.ColumnCount = 4;
             this.name = name;
             this.initiative = initiative;
             this.health = health;
-            this.Size = new Size(25, 25);
             this.BackColor = Color.Aqua;
             this.Tag = tag;
-            this.Size = new Size(25, 25);
+            this.Size = new Size(100, 25);
             this.Location = new Point(0, tag * 30);
             this.Visible = true;
             this.BorderStyle = BorderStyle.FixedSingle;
             this.Dock = DockStyle.Top;
-            label = new Label();
-            label.Text = name;
-            label.Font = new Font(label.Font.FontFamily, 12);
-            label.Location = new Point(this.Location.X + 10, 1);
-            Controls.Add(label);
+
+            this.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 45F));
+
+            orderLabel = new Label();
+            updateOrder(initiative);
+            orderLabel.Font = new Font(orderLabel.Font.FontFamily, 12);
+            Controls.Add(orderLabel);
+
+            this.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 225f));
+
+            nameLabel = new Label();
+            nameLabel.Text = name;
+            nameLabel.Font = new Font(nameLabel.Font.FontFamily, 12);
+            nameLabel.Size = new Size(name.Length * 10, 25);
+            Controls.Add(nameLabel);
+
+            this.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+
+            upButton = new Button();
+            upButton.Click += upButton_Click;
+            upButton.BackgroundImage = InitiativeTracker.Properties.Resources.Up_Arrow_PNG_Picture;
+            upButton.BackgroundImageLayout = ImageLayout.Zoom;
+            //upButton.Size = new Size(20, 20);
+            Controls.Add(upButton);
+
+            downButton = new Button();
+            downButton.Click += downButton_Click;
+            downButton.BackgroundImage = InitiativeTracker.Properties.Resources.arrow_down_01_512;
+            downButton.BackgroundImageLayout = ImageLayout.Zoom;
+            //upButton.Size = new Size(20, 20);
+            Controls.Add(downButton);
         }
 
-        public void updateLabel(string str)
+        public void updateName(string str)
         {
-            label.Text = str + name;
+            name = str;
+            nameLabel.Text = name;
+            nameLabel.Size = new Size(name.Length * 10, 25);
+        }
+
+        public void updateOrder(int num)
+        {
+            initiative = num;
+            orderLabel.Text = "(" + num.ToString() + ")";
+        }
+
+        public void updateLocation(int num)
+        {
+            this.Location = new Point(0, num * 30);
+        }
+
+        void upButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        void downButton_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

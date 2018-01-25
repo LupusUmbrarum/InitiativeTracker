@@ -189,7 +189,7 @@ namespace InitiativeTracker
 
         private void addCharacter()
         {
-            CharacterPanel cp = new CharacterPanel("test" + masterPanel.Controls.Count, new Random().Next(), 45, masterPanel.Controls.Count);
+            CharacterPanel cp = new CharacterPanel("The Hassell Family is Large", new Random().Next(1, 35), 45, masterPanel.Controls.Count);
             
             masterPanel.Controls.Add(cp);
         }

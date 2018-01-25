@@ -69,6 +69,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -86,7 +87,11 @@
   <ItemGroup>
     <Content Include="173572_200_wAB_icon.ico" />
     <Content Include="9_1Z5_icon.ico" />
+    <Content Include="downArrow.png" />
     <Content Include="icon.ico" />
+    <None Include="Resources\arrow-down-01-512.png" />
+    <None Include="Resources\Up-Arrow-PNG-Picture.png" />
+    <Content Include="upArrow.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

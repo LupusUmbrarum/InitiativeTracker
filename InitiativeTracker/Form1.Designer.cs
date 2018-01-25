@@ -105,6 +105,7 @@
             // 
             // addButton
             // 
+            this.addButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.addButton.Location = new System.Drawing.Point(434, 29);
             this.addButton.Name = "addButton";
             this.addButton.Size = new System.Drawing.Size(75, 23);
