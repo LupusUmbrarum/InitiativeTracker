@@ -91,6 +91,7 @@
     <Content Include="icon.ico" />
     <None Include="Resources\arrow-down-01-512.png" />
     <None Include="Resources\Up-Arrow-PNG-Picture.png" />
+    <Content Include="Resources\x.png" />
     <Content Include="upArrow.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

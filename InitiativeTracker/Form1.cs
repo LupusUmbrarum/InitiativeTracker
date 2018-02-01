@@ -12,14 +12,12 @@ namespace InitiativeTracker
 {
     public partial class Form1 : Form
     {
-        public static List<Actor> actors;
-        Actor temp;
+        public static List<CharacterPanel> characters;
 
         public Form1()
         {
             InitializeComponent();
-            actors = new List<Actor>();
-            //masterPanel.Visible = false;
+            characters = new List<CharacterPanel>();
         }
 
         private void nameBox_Enter(object sender, EventArgs e)
@@ -38,8 +36,7 @@ namespace InitiativeTracker
                         {
                             try
                             {
-                                temp = new Actor(nameBox.Text, Convert.ToInt32(initiativeBox.Text));
-                                actors.Add(temp);
+                                insertCharacter();
                                 nameBox.Text = "";
                                 initiativeBox.Text = "";
                             }
@@ -70,8 +67,7 @@ namespace InitiativeTracker
                     {
                         try
                         {
-                            temp = new Actor(nameBox.Text, Convert.ToInt32(initiativeBox.Text));
-                            actors.Add(temp);
+                            insertCharacter();
                             nameBox.Text = "";
                             initiativeBox.Text = "";
                             nameBox.Focus();
@@ -92,7 +88,7 @@ namespace InitiativeTracker
                 {
                     try
                     {
-                        actors.RemoveAt(Convert.ToInt32(removeBox.Text) - 1);
+                        //actors.RemoveAt(Convert.ToInt32(removeBox.Text) - 1);
                         removeBox.Text = "";
                     }
                     catch (Exception ex) { }
@@ -109,8 +105,7 @@ namespace InitiativeTracker
                 {
                     try
                     {
-                        temp = new Actor(nameBox.Text, Convert.ToInt32(initiativeBox.Text));
-                        actors.Add(temp);
+                        insertCharacter();
                         nameBox.Text = "";
                         initiativeBox.Text = "";
                         nameBox.Focus();
@@ -132,7 +127,7 @@ namespace InitiativeTracker
             {
                 try
                 {
-                    actors.RemoveAt(Convert.ToInt32(removeBox.Text) - 1);
+                    //actors.RemoveAt(Convert.ToInt32(removeBox.Text) - 1);
                     removeBox.Text = "";
                 }
                 catch (Exception ex) { }
@@ -143,7 +138,9 @@ namespace InitiativeTracker
         private void clearButton_Click(object sender, EventArgs e)
         {
             label1.Text = "";
-            actors.Clear();
+            masterPanel.Controls.Clear();
+            characters.Clear();
+            //actors.Clear();
             removeBox.Text = "";
         }
 
@@ -164,6 +161,7 @@ namespace InitiativeTracker
 
         private void sortList()
         {
+            /*
             for (int x = 0; x < actors.Count() - 1; x++)
             {
                 for (int y = 0; y < actors.Count() - x - 1; y++)
@@ -176,27 +174,113 @@ namespace InitiativeTracker
                     }
                 }
             }
+            */
         }
 
         private void displayList()
         {
+            /*
             label1.Text = "";
             for (int x = 0; x < actors.Count(); x++)
             {
                 label1.Text += "(" + (x + 1) + ") " + actors[x].name + " " + actors[x].initiative + "\n";
-            }
+            }*/
         }
 
         private void addCharacter()
         {
-            CharacterPanel cp = new CharacterPanel("The Hassell Family is Large", new Random().Next(1, 35), 45, masterPanel.Controls.Count);
+            CharacterPanel cp = new CharacterPanel("The Hassell Family is Large", new Random().Next(1, 35), 45, masterPanel.Controls.Count, this);
             
             masterPanel.Controls.Add(cp);
+            characters.Add(cp);
+        }
+
+        private void insertCharacter()
+        {
+            //create new character
+            CharacterPanel tempCP = new CharacterPanel(nameBox.Text, Convert.ToInt32(initiativeBox.Text), 0, masterPanel.Controls.Count+1, this);
+
+            //determine where to place character
+            if(characters.Count > 0)
+            {
+                if(characters[0].initiative > tempCP.initiative)
+                {
+                    characters.Insert(0, tempCP);
+                }
+                else if(characters[characters.Count-1].initiative <= tempCP.initiative)
+                {
+                    characters.Add(tempCP);
+                }
+                else
+                {
+                    for (int x = 0; x < characters.Count; x++)
+                    {
+                        if (tempCP.initiative < characters[x].initiative)
+                        {
+                            characters.Insert(x, tempCP);
+                            break;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                characters.Add(tempCP);
+            }
+
+            displayCharacterPanels();
+        }
+
+        private void displayCharacterPanels()//TODO try to optimize redrawing of panels
+        {
+            masterPanel.Controls.Clear();
+            for (int x = 0; x < characters.Count; x++)
+            {
+                characters[x].updateLocation(x);
+                masterPanel.Controls.Add(characters[x]);
+            }
+            masterPanel.Invalidate();
+        }
+
+        public void moveUp(CharacterPanel cp)
+        {
+            int index = characters.IndexOf(cp);
+            MessageBox.Show(index.ToString());
+            try
+            {
+                CharacterPanel temp = characters[index + 1];
+                characters[index] = temp;
+                characters[index + 1] = cp;
+                displayCharacterPanels();
+            }
+            catch (Exception ex) { System.Media.SystemSounds.Beep.Play(); MessageBox.Show("error up" + ex.Message + index); }
+        }
+
+        public void moveDown(CharacterPanel cp)
+        {
+            int index = characters.IndexOf(cp);
+            try
+            {
+                CharacterPanel temp = characters[index - 1];
+                characters[index] = temp;
+                characters[index - 1] = cp;
+                displayCharacterPanels();
+            }
+            catch (Exception ex) { System.Media.SystemSounds.Beep.Play(); MessageBox.Show("error down " + ex.Message + index); }
+        }
+
+        public void removeCharacterPanel(CharacterPanel cp)
+        {
+            masterPanel.Controls.Remove(cp);
+            characters.Remove(cp);
+            displayCharacterPanels();
         }
 
         private void masterPanel_DoubleClick(object sender, EventArgs e)
         {
-            addCharacter();
+            //insertCharacter();//addCharacter();
+            displayCharacterPanels();
+            
         }
     }
 

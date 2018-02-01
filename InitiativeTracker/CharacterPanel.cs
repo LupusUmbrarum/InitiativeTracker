@@ -8,18 +8,20 @@ using System.Windows.Forms;
 
 namespace InitiativeTracker
 {
-    class CharacterPanel : TableLayoutPanel //FlowLayoutPanel works, but has large spaces between each control
+    public class CharacterPanel : TableLayoutPanel //FlowLayoutPanel works, but has large spaces between each control
     {
         public string name;
         public int initiative, health;
 
         private Label nameLabel, orderLabel;
         private TextBox healthBox;
-        private Button upButton, downButton;
+        private Button upButton, downButton, removeButton;
+        public Form1 parent;
 
-        public CharacterPanel(string name, int initiative, int health, int tag)
+        public CharacterPanel(string name, int initiative, int health, int tag, Form1 parent)
         {
-            this.ColumnCount = 4;
+            this.parent = parent;
+            this.ColumnCount = 5;
             this.name = name;
             this.initiative = initiative;
             this.health = health;
@@ -46,21 +48,30 @@ namespace InitiativeTracker
             nameLabel.Size = new Size(name.Length * 10, 25);
             Controls.Add(nameLabel);
 
-            this.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.AutoSize, 100F));
 
             upButton = new Button();
             upButton.Click += upButton_Click;
             upButton.BackgroundImage = InitiativeTracker.Properties.Resources.Up_Arrow_PNG_Picture;
             upButton.BackgroundImageLayout = ImageLayout.Zoom;
-            //upButton.Size = new Size(20, 20);
+            upButton.Anchor = AnchorStyles.Right;
+            upButton.MaximumSize = new Size(30, 20);
             Controls.Add(upButton);
 
             downButton = new Button();
             downButton.Click += downButton_Click;
             downButton.BackgroundImage = InitiativeTracker.Properties.Resources.arrow_down_01_512;
             downButton.BackgroundImageLayout = ImageLayout.Zoom;
-            //upButton.Size = new Size(20, 20);
+            downButton.Anchor = AnchorStyles.Right;
+            downButton.MaximumSize = new Size(30, 20);
             Controls.Add(downButton);
+
+            removeButton = new Button();
+            removeButton.Click += removeButton_Click;
+            //removeButton.BackgroundImage = InitiativeTracker.Properties.Resources.
+            removeButton.Size = new Size(20, 20);
+            removeButton.Anchor = AnchorStyles.Right;
+            Controls.Add(removeButton);
         }
 
         public void updateName(string str)
@@ -83,12 +94,17 @@ namespace InitiativeTracker
 
         void upButton_Click(object sender, EventArgs e)
         {
-
+            parent.moveUp(this);
         }
 
         void downButton_Click(object sender, EventArgs e)
         {
+            parent.moveDown(this);
+        }
 
+        void removeButton_Click(object sender, EventArgs e)
+        {
+            parent.removeCharacterPanel(this);
         }
     }
 }

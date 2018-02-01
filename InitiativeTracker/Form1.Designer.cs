@@ -71,7 +71,7 @@
             // 
             this.nameBox.Location = new System.Drawing.Point(53, 31);
             this.nameBox.Name = "nameBox";
-            this.nameBox.Size = new System.Drawing.Size(224, 20);
+            this.nameBox.Size = new System.Drawing.Size(273, 20);
             this.nameBox.TabIndex = 2;
             this.nameBox.Enter += new System.EventHandler(this.nameBox_Enter);
             this.nameBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.nameBox_KeyDown);
@@ -88,7 +88,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(283, 34);
+            this.label3.Location = new System.Drawing.Point(332, 34);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(46, 13);
             this.label3.TabIndex = 4;
@@ -96,7 +96,7 @@
             // 
             // initiativeBox
             // 
-            this.initiativeBox.Location = new System.Drawing.Point(336, 31);
+            this.initiativeBox.Location = new System.Drawing.Point(385, 31);
             this.initiativeBox.Name = "initiativeBox";
             this.initiativeBox.Size = new System.Drawing.Size(45, 20);
             this.initiativeBox.TabIndex = 5;
