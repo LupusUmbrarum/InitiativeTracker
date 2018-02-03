@@ -7,3 +7,12 @@ C:\Users\lupus_000\Documents\Visual Studio 2013\Projects\InitiativeTracker\Initi
 C:\Users\lupus_000\Documents\Visual Studio 2013\Projects\InitiativeTracker\InitiativeTracker\obj\Debug\InitiativeTracker.csproj.GenerateResource.Cache
 C:\Users\lupus_000\Documents\Visual Studio 2013\Projects\InitiativeTracker\InitiativeTracker\obj\Debug\InitiativeTracker.exe
 C:\Users\lupus_000\Documents\Visual Studio 2013\Projects\InitiativeTracker\InitiativeTracker\obj\Debug\InitiativeTracker.pdb
+A:\GitHub\InitiativeTracker\InitiativeTracker\bin\Debug\InitiativeTracker.exe.config
+A:\GitHub\InitiativeTracker\InitiativeTracker\obj\Debug\InitiativeTracker.exe
+A:\GitHub\InitiativeTracker\InitiativeTracker\obj\Debug\InitiativeTracker.pdb
+A:\GitHub\InitiativeTracker\InitiativeTracker\bin\Debug\InitiativeTracker.exe
+A:\GitHub\InitiativeTracker\InitiativeTracker\bin\Debug\InitiativeTracker.pdb
+A:\GitHub\InitiativeTracker\InitiativeTracker\obj\Debug\InitiativeTracker.csprojResolveAssemblyReference.cache
+A:\GitHub\InitiativeTracker\InitiativeTracker\obj\Debug\InitiativeTracker.Form1.resources
+A:\GitHub\InitiativeTracker\InitiativeTracker\obj\Debug\InitiativeTracker.Properties.Resources.resources
+A:\GitHub\InitiativeTracker\InitiativeTracker\obj\Debug\InitiativeTracker.csproj.GenerateResource.Cache

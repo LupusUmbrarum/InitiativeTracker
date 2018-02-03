@@ -37,12 +37,14 @@ namespace InitiativeTracker
                         {
                             try
                             {
+                                e.Handled = e.SuppressKeyPress = true;
                                 insertCharacter();
                             }
                             catch (Exception ex) { }
                         }
                         else
                         {
+                            e.Handled = e.SuppressKeyPress = true;
                             initiativeBox.Focus();
                         }
                     }
@@ -60,13 +62,22 @@ namespace InitiativeTracker
             switch (e.KeyCode)
             {
                 case Keys.Enter:
-                    if (nameBox.Text.Length > 0 && initiativeBox.Text.Length > 0)
+                    if (initiativeBox.Text.Length > 0)
                     {
-                        try
+                        if(nameBox.Text.Length > 0)
                         {
-                            insertCharacter();
+                            try
+                            {
+                                e.Handled = e.SuppressKeyPress = true;
+                                insertCharacter();
+                            }
+                            catch (Exception ex) { }
                         }
-                        catch (Exception ex) { }
+                        else
+                        {
+                            e.Handled = e.SuppressKeyPress = true;
+                            nameBox.Focus();
+                        }
                     }
                     break;
             }
