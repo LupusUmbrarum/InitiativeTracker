@@ -5,3 +5,6 @@
 3. Optimize the displayCharacterPanels function
 
 4. Bugfix: if the user enters an itiative larger than 2 digits, the initiative display gets cut off.
+
+5. Feature: enter rand into the initiative textBox to get a random number between 1 and 30
+
