@@ -12,14 +12,13 @@ namespace InitiativeTracker
 {
     public partial class Form1 : Form
     {
-        public static List<Actor> actors;
-        Actor temp;
+        public static List<CharacterPanel> characters;
 
         public Form1()
         {
             InitializeComponent();
-            actors = new List<Actor>();
-            //masterPanel.Visible = false;
+            nameBox.Focus();
+            characters = new List<CharacterPanel>();
         }
 
         private void nameBox_Enter(object sender, EventArgs e)
@@ -38,10 +37,7 @@ namespace InitiativeTracker
                         {
                             try
                             {
-                                temp = new Actor(nameBox.Text, Convert.ToInt32(initiativeBox.Text));
-                                actors.Add(temp);
-                                nameBox.Text = "";
-                                initiativeBox.Text = "";
+                                insertCharacter();
                             }
                             catch (Exception ex) { }
                         }
@@ -50,8 +46,6 @@ namespace InitiativeTracker
                             initiativeBox.Focus();
                         }
                     }
-                    sortList();
-                    displayList();
                     break;
             }
         }
@@ -70,34 +64,11 @@ namespace InitiativeTracker
                     {
                         try
                         {
-                            temp = new Actor(nameBox.Text, Convert.ToInt32(initiativeBox.Text));
-                            actors.Add(temp);
-                            nameBox.Text = "";
-                            initiativeBox.Text = "";
-                            nameBox.Focus();
+                            insertCharacter();
                         }
                         catch (Exception ex) { }
                     }
-                    sortList();
-                    displayList();
                     break;
-            }
-        }
-
-        private void removeBox_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                if (removeBox.Text.Length > 0)
-                {
-                    try
-                    {
-                        actors.RemoveAt(Convert.ToInt32(removeBox.Text) - 1);
-                        removeBox.Text = "";
-                    }
-                    catch (Exception ex) { }
-                    displayList();
-                }
             }
         }
 
@@ -109,11 +80,7 @@ namespace InitiativeTracker
                 {
                     try
                     {
-                        temp = new Actor(nameBox.Text, Convert.ToInt32(initiativeBox.Text));
-                        actors.Add(temp);
-                        nameBox.Text = "";
-                        initiativeBox.Text = "";
-                        nameBox.Focus();
+                        insertCharacter();
                     }
                     catch (Exception ex) { }
                 }
@@ -122,29 +89,14 @@ namespace InitiativeTracker
                     initiativeBox.Focus();
                 }
             }
-            sortList();
-            displayList();
-        }
-
-        private void removeButton_Click(object sender, EventArgs e)
-        {
-            if (removeBox.Text.Length > 0)
-            {
-                try
-                {
-                    actors.RemoveAt(Convert.ToInt32(removeBox.Text) - 1);
-                    removeBox.Text = "";
-                }
-                catch (Exception ex) { }
-                displayList();
-            }
         }
 
         private void clearButton_Click(object sender, EventArgs e)
         {
             label1.Text = "";
-            actors.Clear();
-            removeBox.Text = "";
+            masterPanel.Controls.Clear();
+            characters.Clear();
+            nameBox.Focus();
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
@@ -154,7 +106,13 @@ namespace InitiativeTracker
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Coming soon");
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            try
+            {
+                System.IO.Directory.CreateDirectory(path += "\\Tracked Initiatives");
+                System.IO.File.WriteAllText(path + "\\test.txt", "testing");
+            }
+            catch (Exception ex) { }
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -162,41 +120,110 @@ namespace InitiativeTracker
             this.Dispose();
         }
 
-        private void sortList()
+        private void insertCharacter()
         {
-            for (int x = 0; x < actors.Count() - 1; x++)
+            nameBox.Text += " ";
+
+            //create new character
+            CharacterPanel tempCP = new CharacterPanel(nameBox.Text, Convert.ToInt32(initiativeBox.Text), 0, masterPanel.Controls.Count+1, this);
+
+            //determine where to place character
+            if(characters.Count > 0)
             {
-                for (int y = 0; y < actors.Count() - x - 1; y++)
+                if(characters[0].initiative > tempCP.initiative)
                 {
-                    if (actors[y].initiative < actors[y + 1].initiative)
+                    characters.Insert(0, tempCP);
+                }
+                else if(characters[characters.Count-1].initiative <= tempCP.initiative)
+                {
+                    characters.Add(tempCP);
+                }
+                else
+                {
+                    for (int x = 0; x < characters.Count; x++)
                     {
-                        Actor temp = actors[y];
-                        actors[y] = actors[y + 1];
-                        actors[y + 1] = temp;
+                        if (tempCP.initiative < characters[x].initiative)
+                        {
+                            characters.Insert(x, tempCP);
+                            break;
+                        }
                     }
                 }
             }
+            else
+            {
+                characters.Add(tempCP);
+            }
+
+            nameBox.Text = "";
+            initiativeBox.Text = "";
+            nameBox.Focus();
+
+            masterPanel.Controls.Add(tempCP);
+            masterPanel2.Controls.Add(tempCP);
+
+            displayCharacterPanels();
         }
 
-        private void displayList()
+        //I'm trying a sort of screen-swap 'technique'. Kinda helps, kinda doesn't
+        private void displayCharacterPanels()//TODO try to optimize redrawing of panels
         {
-            label1.Text = "";
-            for (int x = 0; x < actors.Count(); x++)
+            if(masterPanel.Visible)
             {
-                label1.Text += "(" + (x + 1) + ") " + actors[x].name + " " + actors[x].initiative + "\n";
+                masterPanel2.Controls.Clear();
+                for (int x = 0; x < characters.Count; x++)
+                {
+                    masterPanel2.Controls.Add(characters[x]);
+                }
+                masterPanel2.Invalidate();
+                masterPanel2.Visible = true;
+                masterPanel.Visible = false;
+            }
+            else
+            {
+                masterPanel.Controls.Clear();
+                for (int x = 0; x < characters.Count; x++)
+                {
+                    masterPanel.Controls.Add(characters[x]);
+                    masterPanel.Controls[x].Location = new Point(0, x * 35);
+                }
+                masterPanel.Invalidate();
+                masterPanel.Visible = true;
+                masterPanel2.Visible = false;
             }
         }
 
-        private void addCharacter()
+        public void moveUp(CharacterPanel cp)
         {
-            CharacterPanel cp = new CharacterPanel("The Hassell Family is Large", new Random().Next(1, 35), 45, masterPanel.Controls.Count);
-            
-            masterPanel.Controls.Add(cp);
+            int index = characters.IndexOf(cp);
+            try
+            {
+                CharacterPanel temp = characters[index + 1];
+                characters[index] = temp;
+                characters[index + 1] = cp;
+                displayCharacterPanels();
+            }
+            catch (Exception ex) { System.Media.SystemSounds.Beep.Play(); }
         }
 
-        private void masterPanel_DoubleClick(object sender, EventArgs e)
+        public void moveDown(CharacterPanel cp)
         {
-            addCharacter();
+            int index = characters.IndexOf(cp);
+            try
+            {
+                CharacterPanel temp = characters[index - 1];
+                characters[index] = temp;
+                characters[index - 1] = cp;
+                displayCharacterPanels();
+            }
+            catch (Exception ex) { System.Media.SystemSounds.Beep.Play(); }
+        }
+
+        public void removeCharacterPanel(CharacterPanel cp)
+        {
+            masterPanel.Controls.Remove(cp);
+            characters.Remove(cp);
+            displayCharacterPanels();
         }
     }
 
