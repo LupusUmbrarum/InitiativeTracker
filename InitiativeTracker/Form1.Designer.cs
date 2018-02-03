@@ -36,9 +36,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.initiativeBox = new System.Windows.Forms.TextBox();
             this.addButton = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
-            this.removeBox = new System.Windows.Forms.TextBox();
-            this.removeButton = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -46,6 +43,7 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.masterPanel = new System.Windows.Forms.Panel();
+            this.masterPanel2 = new System.Windows.Forms.Panel();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -59,10 +57,10 @@
             // 
             // clearButton
             // 
-            this.clearButton.Location = new System.Drawing.Point(434, 58);
+            this.clearButton.Location = new System.Drawing.Point(438, 29);
             this.clearButton.Name = "clearButton";
             this.clearButton.Size = new System.Drawing.Size(75, 23);
-            this.clearButton.TabIndex = 1;
+            this.clearButton.TabIndex = 4;
             this.clearButton.Text = "Clear";
             this.clearButton.UseVisualStyleBackColor = true;
             this.clearButton.Click += new System.EventHandler(this.clearButton_Click);
@@ -71,8 +69,8 @@
             // 
             this.nameBox.Location = new System.Drawing.Point(53, 31);
             this.nameBox.Name = "nameBox";
-            this.nameBox.Size = new System.Drawing.Size(273, 20);
-            this.nameBox.TabIndex = 2;
+            this.nameBox.Size = new System.Drawing.Size(195, 20);
+            this.nameBox.TabIndex = 1;
             this.nameBox.Enter += new System.EventHandler(this.nameBox_Enter);
             this.nameBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.nameBox_KeyDown);
             // 
@@ -88,7 +86,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(332, 34);
+            this.label3.Location = new System.Drawing.Point(254, 34);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(46, 13);
             this.label3.TabIndex = 4;
@@ -96,50 +94,23 @@
             // 
             // initiativeBox
             // 
-            this.initiativeBox.Location = new System.Drawing.Point(385, 31);
+            this.initiativeBox.Location = new System.Drawing.Point(307, 31);
             this.initiativeBox.Name = "initiativeBox";
             this.initiativeBox.Size = new System.Drawing.Size(45, 20);
-            this.initiativeBox.TabIndex = 5;
+            this.initiativeBox.TabIndex = 2;
             this.initiativeBox.Enter += new System.EventHandler(this.initiativeBox_Enter);
             this.initiativeBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.initiativeBox_KeyDown);
             // 
             // addButton
             // 
             this.addButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.addButton.Location = new System.Drawing.Point(434, 29);
+            this.addButton.Location = new System.Drawing.Point(356, 29);
             this.addButton.Name = "addButton";
             this.addButton.Size = new System.Drawing.Size(75, 23);
-            this.addButton.TabIndex = 6;
+            this.addButton.TabIndex = 3;
             this.addButton.Text = "Add";
             this.addButton.UseVisualStyleBackColor = true;
             this.addButton.Click += new System.EventHandler(this.addButton_Click);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 63);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(277, 13);
-            this.label4.TabIndex = 7;
-            this.label4.Text = "Enter the number in parentheses that you want to remove";
-            // 
-            // removeBox
-            // 
-            this.removeBox.Location = new System.Drawing.Point(295, 60);
-            this.removeBox.Name = "removeBox";
-            this.removeBox.Size = new System.Drawing.Size(55, 20);
-            this.removeBox.TabIndex = 8;
-            this.removeBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.removeBox_KeyDown);
-            // 
-            // removeButton
-            // 
-            this.removeButton.Location = new System.Drawing.Point(356, 58);
-            this.removeButton.Name = "removeButton";
-            this.removeButton.Size = new System.Drawing.Size(75, 23);
-            this.removeButton.TabIndex = 9;
-            this.removeButton.Text = "Remove";
-            this.removeButton.UseVisualStyleBackColor = true;
-            this.removeButton.Click += new System.EventHandler(this.removeButton_Click);
             // 
             // menuStrip1
             // 
@@ -190,24 +161,36 @@
             // 
             // masterPanel
             // 
+            this.masterPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.masterPanel.AutoScroll = true;
             this.masterPanel.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.masterPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.masterPanel.Location = new System.Drawing.Point(0, 88);
+            this.masterPanel.Location = new System.Drawing.Point(0, 58);
             this.masterPanel.Name = "masterPanel";
-            this.masterPanel.Size = new System.Drawing.Size(525, 536);
+            this.masterPanel.Size = new System.Drawing.Size(525, 566);
             this.masterPanel.TabIndex = 13;
-            this.masterPanel.DoubleClick += new System.EventHandler(this.masterPanel_DoubleClick);
+            this.masterPanel.Visible = false;
+            // 
+            // masterPanel2
+            // 
+            this.masterPanel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.masterPanel2.AutoScroll = true;
+            this.masterPanel2.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.masterPanel2.Location = new System.Drawing.Point(0, 57);
+            this.masterPanel2.Name = "masterPanel2";
+            this.masterPanel2.Size = new System.Drawing.Size(525, 566);
+            this.masterPanel2.TabIndex = 14;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(525, 624);
+            this.Controls.Add(this.masterPanel2);
             this.Controls.Add(this.masterPanel);
-            this.Controls.Add(this.removeButton);
-            this.Controls.Add(this.removeBox);
-            this.Controls.Add(this.label4);
             this.Controls.Add(this.addButton);
             this.Controls.Add(this.initiativeBox);
             this.Controls.Add(this.label3);
@@ -235,9 +218,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox initiativeBox;
         private System.Windows.Forms.Button addButton;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox removeBox;
-        private System.Windows.Forms.Button removeButton;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
@@ -245,6 +225,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.Panel masterPanel;
+        private System.Windows.Forms.Panel masterPanel2;
     }
 }
 
