@@ -13,6 +13,8 @@ namespace InitiativeTracker
     public partial class Form1 : Form
     {
         public static List<CharacterPanel> characters;
+        private SaveFileDialog sfd;
+        private OpenFileDialog ofd;
 
         public Form1()
         {
@@ -112,16 +114,61 @@ namespace InitiativeTracker
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Coming soon");
+            if(ofd == null)
+            {
+                ofd = new OpenFileDialog();
+                ofd.FileOk += ofd_FileOk;
+                ofd.Filter = "Tracked Initiatives (TI) | *.TI";
+                ofd.RestoreDirectory = true;
+            }
+            ofd.ShowDialog();
+        }
+
+        void ofd_FileOk(object sender, CancelEventArgs e)
+        {
+            string[] lines = {};
+            try
+            {
+                lines = System.IO.File.ReadAllLines(ofd.FileName);
+            }
+            catch (Exception ex) { }
+            
+            if(lines.Length > 0)
+            {
+                string[] chars;
+                for (int x = 0; x < lines.Length; x++)
+                {
+                    chars = lines[x].Split('^');
+                    insertCharacter(Convert.ToInt32(chars[0]), chars[1], Convert.ToInt32(chars[2]));
+                }
+            }
+            
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            if(sfd == null)
+            {
+                sfd = new SaveFileDialog();
+                sfd.FileOk += sfd_FileOk;
+                sfd.Filter = "Tracked Initiatives (TI) | *.TI";
+                sfd.RestoreDirectory = true;
+            }
+            sfd.ShowDialog();
+        }
+
+        void sfd_FileOk(object sender, CancelEventArgs e)
+        {
+            List<string> panels = new List<string>();
+
+            foreach(CharacterPanel x in characters)
+            {
+                panels.Add(x.getSaveData());
+            }
+
             try
             {
-                System.IO.Directory.CreateDirectory(path += "\\Tracked Initiatives");
-                System.IO.File.WriteAllText(path + "\\test.txt", "testing");
+                System.IO.File.WriteAllLines(sfd.FileName, panels.ToArray<string>());
             }
             catch (Exception ex) { }
         }
@@ -131,12 +178,19 @@ namespace InitiativeTracker
             this.Dispose();
         }
 
-        private void insertCharacter()
+        private void insertCharacter(int initiative = 0, string name = "", int health = 0)
         {
-            nameBox.Text += " ";
-
-            //create new character
-            CharacterPanel tempCP = new CharacterPanel(nameBox.Text, Convert.ToInt32(initiativeBox.Text), 0, masterPanel.Controls.Count+1, this);
+            CharacterPanel tempCP;
+            //create new characterpanel
+            if(name != "")
+            {
+                tempCP = new CharacterPanel(name, initiative, health, masterPanel.Controls.Count + 1, this);
+            }
+            else
+            {
+                nameBox.Text += " ";
+                tempCP = new CharacterPanel(nameBox.Text, Convert.ToInt32(initiativeBox.Text), 0, masterPanel.Controls.Count + 1, this);
+            }
 
             //determine where to place character
             if(characters.Count > 0)

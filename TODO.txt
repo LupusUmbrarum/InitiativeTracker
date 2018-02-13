@@ -8,3 +8,6 @@
 
 5. Feature: enter rand into the initiative textBox to get a random number between 1 and 30
 
+6. open save as to the previously opened file, if possible
+
+7. add ctrl+o and ctrl+s
