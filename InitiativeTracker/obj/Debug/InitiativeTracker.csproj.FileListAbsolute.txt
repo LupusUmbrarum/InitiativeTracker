@@ -16,3 +16,12 @@ A:\GitHub\InitiativeTracker\InitiativeTracker\obj\Debug\InitiativeTracker.csproj
 A:\GitHub\InitiativeTracker\InitiativeTracker\obj\Debug\InitiativeTracker.Form1.resources
 A:\GitHub\InitiativeTracker\InitiativeTracker\obj\Debug\InitiativeTracker.Properties.Resources.resources
 A:\GitHub\InitiativeTracker\InitiativeTracker\obj\Debug\InitiativeTracker.csproj.GenerateResource.Cache
+C:\Users\lupus_000\Documents\GitHub\InitiativeTracker\InitiativeTracker\bin\Debug\InitiativeTracker.exe.config
+C:\Users\lupus_000\Documents\GitHub\InitiativeTracker\InitiativeTracker\obj\Debug\InitiativeTracker.exe
+C:\Users\lupus_000\Documents\GitHub\InitiativeTracker\InitiativeTracker\obj\Debug\InitiativeTracker.pdb
+C:\Users\lupus_000\Documents\GitHub\InitiativeTracker\InitiativeTracker\bin\Debug\InitiativeTracker.exe
+C:\Users\lupus_000\Documents\GitHub\InitiativeTracker\InitiativeTracker\bin\Debug\InitiativeTracker.pdb
+C:\Users\lupus_000\Documents\GitHub\InitiativeTracker\InitiativeTracker\obj\Debug\InitiativeTracker.csprojResolveAssemblyReference.cache
+C:\Users\lupus_000\Documents\GitHub\InitiativeTracker\InitiativeTracker\obj\Debug\InitiativeTracker.Form1.resources
+C:\Users\lupus_000\Documents\GitHub\InitiativeTracker\InitiativeTracker\obj\Debug\InitiativeTracker.Properties.Resources.resources
+C:\Users\lupus_000\Documents\GitHub\InitiativeTracker\InitiativeTracker\obj\Debug\InitiativeTracker.csproj.GenerateResource.Cache
